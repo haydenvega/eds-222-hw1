@@ -1,7 +1,7 @@
 ---
 title: "EDS 222: Homework 1"
-date: "Assigned ???, due ???"
-author: "Your Name Here"
+date: "Assigned 10/2, due 10/8"
+author: "Hayden Vega"
 ---
 
 ## Background
