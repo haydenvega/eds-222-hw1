@@ -1,0 +1,52 @@
+---
+title: "office hour practice"
+author: "Hayden Vega"
+date: "2024-10-10"
+output: html_document
+---
+```{r}
+
+library(tidyverse)
+# x = precip
+# y = tree height
+
+precip <- runif(1e4, min = 10, max = 100)
+
+beta0 <- 8 
+
+beta1 <- 0.75
+
+sigma <- 1
+
+u <- rnorm(1e4, mean = 0, sd = sigma) #mean has to be zero because the positive and negative errors will balance out
+ tree_height <- beta0 + beta1 * precip + u
+ 
+ plot(precip, tree_height)
+ 
+ tree_pop <- tibble(precip, tree_height)
+ ggplot(tree_pop, aes(precip, tree_height))+
+   geom_point(alpha = 0.05)+
+   geom_abline(slope = beta1, 
+               intercept = beta0,
+               color = "firebrick",
+               linewidth = 2)+
+   geom_point(data = tree_sample, 
+              color = "cornflowerblue")+
+ geom_abline(slope = 0.76573, 
+             intercept = 7.69,
+             color = "cornflowerblue", 
+             linewidth = 1.5)
+ 
+ pop_lm <- lm(tree_height ~ precip, tree_pop)
+ summary(pop_lm)
+ 
+ 
+ tree_sample <- sample_n(tree_pop, 10)
+ 
+
+ sample_lm <- lm(tree_height ~ precip, tree_sample)
+ 
+ summary(sample_lm)$coef["precip", "Estimate"]
+ 
+```
+

@@ -28,17 +28,48 @@ In answering the following questions, please consider the lecture content from c
 
 Load the data from each source and label it as `crowdsourced` and `govt` accordingly. For example:
 
-``` r
+```{r}
 crowdsourced <- readRDS(file.path("data", "airpol-PK-crowdsourced.RDS"))
 govt <- readRDS(file.path("data", "airpol-PK-govt.RDS"))
 ```
 
 ::: callout-warning
 There's an implicit assumption about file organization in the code above. What is it? How can you make the code work?
+
+-   The code assumes that the data files are in a folder called "data" located in our current working directory.
 :::
 
 1.  These dataframes have one row per pollution observation. How many pollution records are in each dataset?
+    -   The crowdsourced data frame has 5,488 pollution records
+
+    -   The govt data frame has 1,960 entries
+
+```{r}
+view(crowdsourced)
+view(govt)
+
+```
+
 2.  Each monitor is located at a unique latitude and longitude location. How many unique monitors are in each dataset?
+    -   There are fourteen unique monitors in the crowdsourced dataframe and five unique monitors in the govt dataframe. I found this by using mutate to create a new column with unique id's grouped by longitude and latitude pairs. I then used the unique function to view all the unique id's and identified the highest number.
+
+```{r}
+column_id <- crowdsourced %>% 
+  group_by(latitude,
+           longitude) %>%
+  mutate(id = cur_group_id())
+
+unique(column_id$id)
+
+
+column_id_gov <- govt %>%
+  group_by(latitude,
+           longitude) %>%
+  mutate(id = cur_group_id())
+
+unique(column_id_gov$id)
+
+```
 
 ::: callout-tip
 `group_by(longitude,latitude)` and `cur_group_id()` in `dplyr` will help in creating a unique identifier for each (longitude, latitude) pair.
@@ -50,9 +81,17 @@ The goal of pollution monitoring in Lahore is to measure the average pollution c
 
 1.  What is the *population* in this setting? Please be precise.
 
+    -   The population that we're interested in is air pollution at every point in the city of Lahore.
+
 2.  What are the *samples* in this setting? Please be precise.
 
-3.  These samples were not randomly collected from across locations in Lahore. Given the sampling approaches described above, discuss possible biases that may enter when we use these samples to construct estimates of population parameters.
+    -   The samples are the collective locations at which air quality has been taken in our data sets
+
+<!-- -->
+
+1.  These samples were not randomly collected from across locations in Lahore. Given the sampling approaches described above, discuss possible biases that may enter when we use these samples to construct estimates of population parameters.
+
+    -   The crowd-sourced data was collected from people who voluntarily elected to have quality monitors in their homes. The people who volunteered for the study might have similar demographics like income, race, or location. Our data become biased when these factors are correlated with our variable in question–air quality. For example, clean air is often positively correlated with income; if our goal is to measure average air quality in the city but we only sampled air quality from wealthy households, our data would yield results for only the cleanest spots in the city rather than the entire city as a whole.
 
 ### Question 3
 
