@@ -181,6 +181,7 @@ crowdsourced_id <- crowdsourced %>%
 
 sample_both_data <- sample_n(sample_both,
                              1000)
+summary(sample_both_data)
 ```
 
 ::: callout-tip
@@ -191,9 +192,30 @@ Second, create a *stratified random sample*. Do so by (i) stratifying your poole
 
 ```{r}
 
+sample_both$latitude_strata <- cut(sample_both$latitude,
+                                   breaks = seq(min(sample_both$latitude),
+                                                max(sample_both$latitude), 
+                                                by = 0.01), include.lowest = TRUE)
+
+strat_both <- sample_both %>% 
+  group_by(latitude_strata) %>% 
+  sample_n(size = 200)
+
+summary(strat_both)
+
 
 ```
 
 #### Question 6.2
 
 Compare estimated means of PM 2.5 for each sampling strategy to the NASA estimate of 89.2 $\mu g/m^3$. Which sample seems to match the satellite data best? What would you recommend the Prime Minister do? Does your proposed sampling strategy rely more on government or on crowd-sourced data? Why might that be the case?
+
+-   <div>
+
+    The mean PM for the stratified sample was closer to the NASA estimate with 64.36 $\mu g/m^3$ compared to the random sample of 61.84 $\mu g/m^3$. I would recommend the Prime Minister to use the NASA estimates because it is the most objective measure of air-quality in the city, and the data is publicly available. If that's not possible, I would reccommend that the Prime Minister uses a stratified random sample to assess the data they currently have because it gave the closest value to the NASA mean, and it likely relies less on biased government data.
+
+    In our stratified sample, entries of government data are incorporated at a proportion lower than it is in the random sample. When we stratify by 0.01 degrees of latitude, we have five total categories of latitude. This means that all the values from any one strata make up exactly 20% of the total entries in our sample. Because the government data is clustered in the same strata (latitude), a **maximum** of 20% government data will be incorporated into our pulled sample. In a random sample of our data, government entries account for about 27% of our data, which means that **on average** 27% of the sample we pull from our parent data will be government entries.
+
+    Less government data likely helps the accuracy of our sample because the government monitors only measure air-quality in a highly localized area. Because our goal is to measure the average air-quality in the city, having data that incorporates a larger spread of locations helps us achieve a more realistic average that is less biased by any one place.
+
+    </div>
