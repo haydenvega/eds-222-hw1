@@ -126,6 +126,12 @@ Use the location of the air pollution stations for both of the sampling strategi
 
     </div>
 
+sample_map \<- ggplot(both, aes(latitude, longitude, color = id))+
+
+geom_point()+
+
+view(sample_map)
+
 ```{r}
 crowdsourced_id <- crowdsourced %>% 
   mutate(id = "Crowd-source")
@@ -133,6 +139,9 @@ crowdsourced_id <- crowdsourced %>%
  govt_id <- govt %>%  mutate(id = "Government")
  
  both <- rbind(crowdsourced_id, govt_id)
+ 
+sample_map <- ggplot(both, aes(longitude, latitude, color = id))+
+geom_point()
 ```
 
 ::: callout-tip
@@ -142,6 +151,12 @@ crowdsourced_id <- crowdsourced %>%
 ### Question 5
 
 The local newspaper in Pakistan, *Dawn*, claims that the government is misreporting the air pollution levels in Lahore. Do the locations of monitors in question 4, relative to crowd-sourced monitors, suggest anything about a possible political bias?
+
+-   <div>
+
+    Yes, the clumped distribution of monitor locations and low number of monitors suggest that the government is misrepresenting air pollution in Lahore. The government is misleading the public by sampling air-quality only from a localized, clean area and saying that their results are representative of the city as a whole.
+
+    </div>
 
 ### Question 6
 
@@ -153,11 +168,31 @@ NASA's satellite data indicates that the average PM across Lahore is 89.2 $\mu g
 
 First, generate a *random sample* of size $n=1000$ air pollution records by (i) pooling observations across the government and the crowd-sourced data; and (ii) drawing observations at random from this pooled sample.
 
+```{r}
+
+crowdsourced_id <- crowdsourced %>% 
+  mutate(id = "Crowd-source")
+
+ govt_id <- govt %>%  
+   mutate(id = "Government")
+ 
+ sample_both <- rbind(crowdsourced_id, 
+                      govt_id)
+
+sample_both_data <- sample_n(sample_both,
+                             1000)
+```
+
 ::: callout-tip
 `bind_rows()` may be helpful.
 :::
 
 Second, create a *stratified random sample*. Do so by (i) stratifying your pooled data-set into strata of 0.01 degrees of latitude, and (ii) randomly sampling 200 air pollution observations from each stratum.
+
+```{r}
+
+
+```
 
 #### Question 6.2
 
