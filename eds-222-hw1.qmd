@@ -81,27 +81,59 @@ The goal of pollution monitoring in Lahore is to measure the average pollution c
 
 1.  What is the *population* in this setting? Please be precise.
 
-    -   The population that we're interested in is air pollution at every point in the city of Lahore.
+    -   The population that we're interested in the average air pollution throughout the entire city of Lahore.
 
 2.  What are the *samples* in this setting? Please be precise.
 
-    -   The samples are the collective locations at which air quality has been taken in our data sets
+    -   The samples are the collective locations at which air quality has been taken in our data sets.
 
 <!-- -->
 
 1.  These samples were not randomly collected from across locations in Lahore. Given the sampling approaches described above, discuss possible biases that may enter when we use these samples to construct estimates of population parameters.
 
-    -   The crowd-sourced data was collected from people who voluntarily elected to have quality monitors in their homes. The people who volunteered for the study might have similar demographics like income, race, or location. Our data become biased when these factors are correlated with our variable in question–air quality. For example, clean air is often positively correlated with income; if our goal is to measure average air quality in the city but we only sampled air quality from wealthy households, our data would yield results for only the cleanest spots in the city rather than the entire city as a whole.
+    -   The crowd-sourced data was collected from people who voluntarily elected to have quality monitors in their homes. The people who volunteered for the study might have similar demographics like income, race, or education. These characteristics bias our data and become issues when they're correlated with our variable in question: air quality. For example, clean air is often positively correlated with income; if we want average air quality throughout the city but we only sampled air quality from wealthy households, our data would yield results for only the cleanest spots in the city rather than the entire city as a whole, and our results would be cleaner than reality.
+    -   The government data was collected from non-random locations across Lahore. If the government chooses only clean locations, but treats it as representative of the whole city, our results will be cleaner than reality. Also, our data could be skewed by sampling only where government officials have access to, potentially excluding private land from sampling. This could create another bias pushing our results further away from reality.
 
 ### Question 3
 
 1.  For both the government data and the crowd-sourced data, report the sample mean, sample minimum, and sample maximum value of PM 2.5 (measured in $\mu g/m^3$).
+    -   For the crowd-sourced data, the mean is 70.2, minimum is 20.0, and maximum is 120.0
+
+    -   For the government data, the mean is 39.65, minimum is 15.0, and maximum is 65.0
+
+        ```{r}
+        summary(crowdsourced)
+        summary(govt)
+        ```
 2.  Discuss any key differences that you see between these two samples.
+    -   <div>
+
+        Crowd-sourced data has a higher range (20 - 120) than government data (15-65), and a higher mean of 70.2 compared to 39.65. The quartiles for the crowd-sourced data are all higher than the government data, suggesting greater overall PM in crowd-sourced data.
+
+        </div>
 3.  Are the differences in mean pollution as expected, given what we know about the sampling strategies?
+    -   <div>
+
+        Yes! We would expect to see the government sites with cleaner air (less PM) than crowd-sourced sites because government officials pick clean areas to sample.
+
+        </div>
 
 ### Question 4
 
 Use the location of the air pollution stations for both of the sampling strategies to generate a map showing locations of each observation. Color the two samples with different colors to highlight how each sample obtains measurements from different parts of the city.
+
+-   <div>
+
+    </div>
+
+```{r}
+crowdsourced_id <- crowdsourced %>% 
+  mutate(id = "Crowd-source")
+
+ govt_id <- govt %>%  mutate(id = "Government")
+ 
+ both <- rbind(crowdsourced_id, govt_id)
+```
 
 ::: callout-tip
 `longitude` indicates location in the *x*-direction, while `latitude` indicates location in the *y*-direction. With `ggplot2` this should be nothing fancy. We'll do more spatial data in `R` later in the course.
