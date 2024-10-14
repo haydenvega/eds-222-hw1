@@ -1,6 +1,6 @@
 ---
 title: "EDS 222: Homework 1"
-date: "Assigned 10/2, due 10/8"
+date: "10/13/2024"
 author: "Hayden Vega"
 ---
 
@@ -45,6 +45,8 @@ There's an implicit assumption about file organization in the code above. What i
     -   The govt data frame has 1,960 entries
 
 ```{r}
+library(tidyverse)
+
 view(crowdsourced)
 view(govt)
 
@@ -122,16 +124,6 @@ The goal of pollution monitoring in Lahore is to measure the average pollution c
 
 Use the location of the air pollution stations for both of the sampling strategies to generate a map showing locations of each observation. Color the two samples with different colors to highlight how each sample obtains measurements from different parts of the city.
 
--   <div>
-
-    </div>
-
-sample_map \<- ggplot(both, aes(latitude, longitude, color = id))+
-
-geom_point()+
-
-view(sample_map)
-
 ```{r}
 crowdsourced_id <- crowdsourced %>% 
   mutate(id = "Crowd-source")
@@ -142,6 +134,8 @@ crowdsourced_id <- crowdsourced %>%
  
 sample_map <- ggplot(both, aes(longitude, latitude, color = id))+
 geom_point()
+
+print(sample_map)
 ```
 
 ::: callout-tip
