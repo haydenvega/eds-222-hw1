@@ -83,11 +83,11 @@ The goal of pollution monitoring in Lahore is to measure the average pollution c
 
 1.  What is the *population* in this setting? Please be precise.
 
-    -   The population that we're interested in the average air pollution throughout the entire city of Lahore.
+    -   The population that we're interested in the average air pollution throughout the entire city of Lahore over the given period of time.
 
 2.  What are the *samples* in this setting? Please be precise.
 
-    -   The samples are the collective locations at which air quality has been taken in our data sets.
+    -   The samples are the areas where monitors are collecting data. In this case we have two samples: crowdsourced and government, both taken from 10/4/18-10/30/19. We separate these samples because they take different approaches to collecting their data.
 
 <!-- -->
 
@@ -106,6 +106,8 @@ The goal of pollution monitoring in Lahore is to measure the average pollution c
         ```{r}
         summary(crowdsourced)
         summary(govt)
+
+        #create a table using the function summarise pm_min, pm_max, pm_mean
         ```
 2.  Discuss any key differences that you see between these two samples.
     -   <div>
