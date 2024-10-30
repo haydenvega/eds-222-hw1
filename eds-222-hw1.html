@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Hayden Vega">
-<meta name="dcterms.date" content="2001-10-13">
+<meta name="dcterms.date" content="2024-10-29">
 
 <title>EDS 222: Homework 1</title>
 <style>
@@ -128,7 +128,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 13, 2001</p>
+      <p class="date">October 29, 2024</p>
     </div>
   </div>
   
@@ -257,11 +257,11 @@ Tip
 <ol type="1">
 <li><p>What is the <em>population</em> in this setting? Please be precise.</p>
 <ul>
-<li>The population that we’re interested in the average air pollution throughout the entire city of Lahore.</li>
+<li>The population that we’re interested in the average air pollution throughout the entire city of Lahore between November 2018 and November 2019.</li>
 </ul></li>
 <li><p>What are the <em>samples</em> in this setting? Please be precise.</p>
 <ul>
-<li>The samples are the collective locations at which air quality has been taken in our data sets.</li>
+<li>The samples are the average air pollution measurements we have taken. In this case we have two samples: crowdsourced and government, both taken from 10/4/18-10/30/19.</li>
 </ul></li>
 </ol>
 <!-- -->
@@ -301,6 +301,7 @@ Tip
  3rd Qu.:2019-08-24   3rd Qu.:53.00   3rd Qu.:31.58   3rd Qu.:74.33  
  Max.   :2019-11-30   Max.   :65.00   Max.   :31.58   Max.   :74.33  </code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#create a table using the function summarise pm_min, pm_max, pm_mean</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></li>
 </ul></li>
 <li>Discuss any key differences that you see between these two samples.
@@ -312,7 +313,7 @@ Tip
 <li>Are the differences in mean pollution as expected, given what we know about the sampling strategies?
 <ul>
 <li><div>
-<p>Yes! We would expect to see the government sites with cleaner air (less PM) than crowd-sourced sites because government officials pick clean areas to sample.</p>
+<p>Yes! We would expect to see the government sites with cleaner air (less PM) than crowd-sourced sites because government officials pick clean areas to sample. Compared to the government data, the crowd sourced data contains dirtier air quality, which is to be expected because these data are taken from a wider range of locations and probably closer to the city’s actual mean.</p>
 </div></li>
 </ul></li>
 </ol>
@@ -321,17 +322,17 @@ Tip
 <h3 class="anchored" data-anchor-id="question-4">Question 4</h3>
 <p>Use the location of the air pollution stations for both of the sampling strategies to generate a map showing locations of each observation. Color the two samples with different colors to highlight how each sample obtains measurements from different parts of the city.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>crowdsourced_id <span class="ot">&lt;-</span> crowdsourced <span class="sc">%&gt;%</span> </span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="st">"Crowd-source"</span>)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a> govt_id <span class="ot">&lt;-</span> govt <span class="sc">%&gt;%</span>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="st">"Government"</span>)</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a> both <span class="ot">&lt;-</span> <span class="fu">rbind</span>(crowdsourced_id, govt_id)</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>sample_map <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(both, <span class="fu">aes</span>(longitude, latitude, <span class="at">color =</span> id))<span class="sc">+</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>()</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sample_map)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>crowdsourced_id <span class="ot">&lt;-</span> crowdsourced <span class="sc">%&gt;%</span> </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="st">"Crowd-source"</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a> govt_id <span class="ot">&lt;-</span> govt <span class="sc">%&gt;%</span>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="st">"Government"</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a> both <span class="ot">&lt;-</span> <span class="fu">rbind</span>(crowdsourced_id, govt_id)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>sample_map <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(both, <span class="fu">aes</span>(longitude, latitude, <span class="at">color =</span> id))<span class="sc">+</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>()</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sample_map)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="eds-222-hw1_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -367,26 +368,26 @@ Tip
 <h4 class="anchored" data-anchor-id="question-6.1">Question 6.1</h4>
 <p>First, generate a <em>random sample</em> of size <span class="math inline">\(n=1000\)</span> air pollution records by (i) pooling observations across the government and the crowd-sourced data; and (ii) drawing observations at random from this pooled sample.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>crowdsourced_id <span class="ot">&lt;-</span> crowdsourced <span class="sc">%&gt;%</span> </span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="st">"Crowd-source"</span>)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a> govt_id <span class="ot">&lt;-</span> govt <span class="sc">%&gt;%</span>  </span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">mutate</span>(<span class="at">id =</span> <span class="st">"Government"</span>)</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a> sample_both <span class="ot">&lt;-</span> <span class="fu">rbind</span>(crowdsourced_id, </span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>                      govt_id)</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>sample_both_data <span class="ot">&lt;-</span> <span class="fu">sample_n</span>(sample_both,</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>                             <span class="dv">1000</span>)</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sample_both_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>crowdsourced_id <span class="ot">&lt;-</span> crowdsourced <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="st">"Crowd-source"</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a> govt_id <span class="ot">&lt;-</span> govt <span class="sc">%&gt;%</span>  </span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">mutate</span>(<span class="at">id =</span> <span class="st">"Government"</span>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a> sample_both <span class="ot">&lt;-</span> <span class="fu">rbind</span>(crowdsourced_id, </span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>                      govt_id)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>sample_both_data <span class="ot">&lt;-</span> <span class="fu">sample_n</span>(sample_both,</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>                             <span class="dv">1000</span>)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sample_both_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      date                  PM           longitude        latitude    
- Min.   :2018-11-04   Min.   : 15.00   Min.   :74.31   Min.   :31.56  
- 1st Qu.:2019-02-04   1st Qu.: 36.00   1st Qu.:74.33   1st Qu.:31.57  
- Median :2019-05-09   Median : 57.00   Median :74.34   Median :31.58  
- Mean   :2019-05-10   Mean   : 61.37   Mean   :74.35   Mean   :31.58  
- 3rd Qu.:2019-08-13   3rd Qu.: 85.00   3rd Qu.:74.38   3rd Qu.:31.58  
- Max.   :2019-11-29   Max.   :120.00   Max.   :74.42   Max.   :31.60  
+ Min.   :2018-11-05   Min.   : 15.00   Min.   :74.31   Min.   :31.56  
+ 1st Qu.:2019-02-07   1st Qu.: 38.00   1st Qu.:74.33   1st Qu.:31.57  
+ Median :2019-05-17   Median : 59.00   Median :74.34   Median :31.58  
+ Mean   :2019-05-19   Mean   : 62.48   Mean   :74.35   Mean   :31.58  
+ 3rd Qu.:2019-08-28   3rd Qu.: 87.00   3rd Qu.:74.38   3rd Qu.:31.58  
+ Max.   :2019-11-30   Max.   :120.00   Max.   :74.42   Max.   :31.60  
       id           
  Length:1000       
  Class :character  
@@ -411,23 +412,23 @@ Tip
 </div>
 <p>Second, create a <em>stratified random sample</em>. Do so by (i) stratifying your pooled data-set into strata of 0.01 degrees of latitude, and (ii) randomly sampling 200 air pollution observations from each stratum.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>sample_both<span class="sc">$</span>latitude_strata <span class="ot">&lt;-</span> <span class="fu">cut</span>(sample_both<span class="sc">$</span>latitude,</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="fu">min</span>(sample_both<span class="sc">$</span>latitude),</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                                                <span class="fu">max</span>(sample_both<span class="sc">$</span>latitude), </span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>                                                <span class="at">by =</span> <span class="fl">0.01</span>), <span class="at">include.lowest =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>strat_both <span class="ot">&lt;-</span> sample_both <span class="sc">%&gt;%</span> </span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(latitude_strata) <span class="sc">%&gt;%</span> </span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="at">size =</span> <span class="dv">200</span>)</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(strat_both)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>sample_both<span class="sc">$</span>latitude_strata <span class="ot">&lt;-</span> <span class="fu">cut</span>(sample_both<span class="sc">$</span>latitude,</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="fu">min</span>(sample_both<span class="sc">$</span>latitude),</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                                                <span class="fu">max</span>(sample_both<span class="sc">$</span>latitude), </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>                                                <span class="at">by =</span> <span class="fl">0.01</span>), <span class="at">include.lowest =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>strat_both <span class="ot">&lt;-</span> sample_both <span class="sc">%&gt;%</span> </span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(latitude_strata) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="at">size =</span> <span class="dv">200</span>)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(strat_both)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      date                  PM           longitude        latitude    
  Min.   :2018-11-04   Min.   : 15.00   Min.   :74.31   Min.   :31.56  
- 1st Qu.:2019-02-14   1st Qu.: 39.00   1st Qu.:74.33   1st Qu.:31.57  
- Median :2019-05-14   Median : 61.00   Median :74.35   Median :31.58  
- Mean   :2019-05-15   Mean   : 64.66   Mean   :74.36   Mean   :31.58  
- 3rd Qu.:2019-08-20   3rd Qu.: 90.00   3rd Qu.:74.40   3rd Qu.:31.59  
+ 1st Qu.:2019-02-06   1st Qu.: 39.00   1st Qu.:74.33   1st Qu.:31.57  
+ Median :2019-05-09   Median : 60.00   Median :74.36   Median :31.58  
+ Mean   :2019-05-14   Mean   : 64.05   Mean   :74.36   Mean   :31.58  
+ 3rd Qu.:2019-08-25   3rd Qu.: 90.00   3rd Qu.:74.40   3rd Qu.:31.59  
  Max.   :2019-11-30   Max.   :120.00   Max.   :74.42   Max.   :31.60  
       id                 latitude_strata
  Length:1000        [31.56,31.57]:200   

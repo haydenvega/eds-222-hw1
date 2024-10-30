@@ -1,6 +1,6 @@
 ---
 title: "EDS 222: Homework 1"
-date: "10/13/2024"
+date: "10/29/2024"
 author: "Hayden Vega"
 ---
 
@@ -83,11 +83,11 @@ The goal of pollution monitoring in Lahore is to measure the average pollution c
 
 1.  What is the *population* in this setting? Please be precise.
 
-    -   The population that we're interested in the average air pollution throughout the entire city of Lahore over the given period of time.
+    -   The population that we're interested in the average air pollution throughout the entire city of Lahore between November 2018 and November 2019.
 
 2.  What are the *samples* in this setting? Please be precise.
 
-    -   The samples are the areas where monitors are collecting data. In this case we have two samples: crowdsourced and government, both taken from 10/4/18-10/30/19. We separate these samples because they take different approaches to collecting their data.
+    -   The samples are the average air pollution measurements we have taken. In this case we have two samples: crowdsourced and government, both taken from 10/4/18-10/30/19.
 
 <!-- -->
 
@@ -118,7 +118,7 @@ The goal of pollution monitoring in Lahore is to measure the average pollution c
 3.  Are the differences in mean pollution as expected, given what we know about the sampling strategies?
     -   <div>
 
-        Yes! We would expect to see the government sites with cleaner air (less PM) than crowd-sourced sites because government officials pick clean areas to sample.
+        Yes! We would expect to see the government sites with cleaner air (less PM) than crowd-sourced sites because government officials pick clean areas to sample. Compared to the government data, the crowd sourced data contains dirtier air quality, which is to be expected because these data are taken from a wider range of locations and probably closer to the city's actual mean.
 
         </div>
 
